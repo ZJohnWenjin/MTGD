@@ -16,9 +16,11 @@ mri:
 
 folder_path:
   path: "PATH/TO/DATA"
-```
 
+```
 Each patient's folder must include all corresponding .nii.gz files.
+> 📌 Make sure that the file names match those specified in `mri_sequence` and `pet_modalities` in your config file.
+```
 PATH/TO/DATA/
 ├── patient1/
 │   ├── mri_type1.nii.gz

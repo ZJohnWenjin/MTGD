@@ -1,0 +1,49 @@
+data:
+    num_workers: 1
+
+model:
+    type: "simple"
+    in_channels: 1
+    stack: 9
+    out_ch: 1
+    ch: 128
+    dropout: 0.0
+    var_type: fixedsmall
+    num_input_modality: 3
+
+diffusion:
+    beta_schedule: linear
+    beta_start: 0.0001
+    beta_end: 0.02
+    num_diffusion_timesteps: 1000
+
+training:
+    batch_size: 8
+    snapshot_freq: 30000
+    n_epochs: 10000
+    n_iters: 5000000
+
+sampling:
+    batch_size: 8
+    last_only: True
+
+optim:
+    weight_decay: 0.000
+    optimizer: "Adam"
+    lr: 0.00003
+    beta1: 0.9
+    amsgrad: false
+    eps: 0.00000001
+
+
+pet:
+    # pet types as target
+    pet_modalities: ['pet_type1.nii.gz', 'pet_type2.nii.gz']
+
+
+mri:
+    # pet types as target
+    mri_sequence: ['mri_type1.nii.gz', 'mri_type2.nii.gz','mri_type3.nii.gz']
+
+folder_path:
+    path : "PATH/TO/DATA"

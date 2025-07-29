@@ -42,7 +42,7 @@ pet:
 
 
 mri:
-    # pet types as target
+    # mri types as conditional input
     mri_sequence: ['mri_type1.nii.gz', 'mri_type2.nii.gz','mri_type3.nii.gz']
 
 folder_path:

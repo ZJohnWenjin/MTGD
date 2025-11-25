@@ -310,11 +310,10 @@ class Upsample(nn.Module):
         return x
 
 class Model(nn.Module):
-    def __init__(self, config,n_channels=1, n_classes=1, bilinear=False):
+    def __init__(self, config,n_channels=1, n_classes=1):
         super(Model, self).__init__()
         self.n_channels = n_channels
         self.n_classes = n_classes
-        self.bilinear = bilinear
         self.ch = 64
 
         self.encoder = Encoder(config,self.ch)
@@ -343,8 +342,7 @@ class Model(nn.Module):
         self.R1 = ResnetBlock(128,128,self.ch,dropout=False)
         self.down3 = Down(128, 256)
         self.R2 = ResnetBlock(256, 256, self.ch, dropout=False)
-        factor = 2 if bilinear else 1
-        self.down4 = Down(256, 512 // factor)
+        self.down4 = Down(256, 512)
         self.up1 = Upsample(512,256)
         self.R3 = ResnetBlock(256, 256, self.ch, dropout=False)
         self.up2 = Upsample(256,128)
@@ -385,5 +383,6 @@ class Model(nn.Module):
         x = self.up4(x)+x1
         logits = self.outc(x)
         return logits
+
 
 

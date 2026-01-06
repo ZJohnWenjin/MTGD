@@ -18,10 +18,10 @@ def get_timestep_embedding(timesteps, embedding_dim):
     emb = math.log(10000) / (half_dim - 1)
     emb = torch.exp(torch.arange(half_dim, dtype=torch.float32) * -emb)
     emb = emb.to(device=timesteps.device)
-    # �� timesteps ת��Ϊ������������չΪ��ά���� Ȼ���� emb ��ˣ��㲥���ƻ�ʹÿ��ʱ�䲽���� emb �е�����Ԫ����ˡ�
+
     emb = timesteps.float()[:, None] * emb[None, :]
     emb = torch.cat([torch.sin(emb), torch.cos(emb)], dim=1)
-    # ��� embedding_dim ��������ʹ�� torch.nn.functional.pad �ڵڶ���ά�������һ���㣬��ʹ���յ�Ƕ��ά���� embedding_dim һ�¡�
+
     if embedding_dim % 2 == 1:  # zero pad
         emb = torch.nn.functional.pad(emb, (0, 1, 0, 0))
     return emb
@@ -383,6 +383,7 @@ class Model(nn.Module):
         x = self.up4(x)+x1
         logits = self.outc(x)
         return logits
+
 
 
 
